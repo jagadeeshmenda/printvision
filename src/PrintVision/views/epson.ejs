@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Epson Printers | PrintVision Digital Solutions</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .machine-card {
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .machine-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+    .machine-card img {
+      height: 200px;
+      object-fit: contain;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+<div class="container my-5">
+  <h2 class="mb-4 text-center">EPSON Printing Solutions</h2>
+
+  <%
+  const machines = [
+
+    /* ===== SIGNAGE ===== */
+    {
+      name: "SureColor SC-S7130",
+      category: "Professional Signage",
+      img: "surecolor-s7130.jpg",
+      desc: "Eco-solvent signage printer with PrecisionCore™ Micro TFP printhead.",
+      specs: ["1200 dpi resolution", "UltraChrome GS3 Ink", "38.7 m²/hr"]
+    },
+    {
+      name: "SureColor SC-S9130",
+      category: "Professional Signage",
+      img: "surecolor-s9130.jpg",
+      desc: "11-colour signage printer with Green Ink and bulk ink system.",
+      specs: ["11-colour ink set", "1.5L ink packs", "Touch panel"]
+    },
+
+    /* ===== TECHNICAL ===== */
+    {
+      name: "SureColor SC-T3130 Series",
+      category: "Technical Drawing",
+      img: "sc-t3130.jpg",
+      desc: "Compact 24-inch technical printer with Wi-Fi and high precision.",
+      specs: ["2400 dpi", "34 sec/A1", "Wi-Fi Direct"]
+    },
+    {
+      name: "T5630DM / T7630D",
+      category: "Technical Drawing",
+      img: "t5630.jpg",
+      desc: "High-speed 44-inch CAD printers for volume production.",
+      specs: ["17 sec/A1", "Dual roll", "High productivity"]
+    },
+    {
+      name: "SC-T3730E / T3730D",
+      category: "Technical Drawing",
+      img: "sc-t3730.jpg",
+      desc: "Secure technical printer with SSD and 6-colour XD3 inks.",
+      specs: ["UltraChrome XD3", "Self-encrypting SSD", "High accuracy"]
+    },
+    {
+      name: "SC-T5730 / T7730 Series",
+      category: "Technical Drawing",
+      img: "t5630.jpg",
+      desc: "Large-format printers with ultra-fast A1 output.",
+      specs: ["16 sec/A1", "Up to 1800 mL ink", "High duty cycle"]
+    },
+
+    /* ===== PHOTO ===== */
+    {
+      name: "SC-P6530E / P8530D",
+      category: "Professional Photo",
+      img: "sc-p6530.jpg",
+      desc: "Professional photo printers with archival quality output.",
+      specs: ["UltraChrome PRO6", "200+ year color life", "High density blacks"]
+    },
+    {
+      name: "SC-P5330",
+      category: "Professional Photo",
+      img: "sc-p5330.jpg",
+      desc: "Gallery-quality photo printer with ultra-high resolution.",
+      specs: ["5760 dpi", "10-colour ink", "Exhibition quality"]
+    },
+    {
+      name: "SC-P7530 / P9530",
+      category: "Professional Photo",
+      img: "surecolor-p9570.jpg",
+      desc: "Wide-gamut professional printers using UltraChrome PRO12 inks.",
+      specs: ["12-colour ink", "Wide colour gamut", "Fine art ready"]
+    },
+
+    /* ===== MINI LAB ===== */
+    {
+      name: "SureLab SL-D1030 / D530",
+      category: "Mini Photo Lab",
+      img: "surecolor-p20050.jpg",
+      desc: "Compact photo minilabs for commercial print shops.",
+      specs: ["D6r-S dye ink", "Micro Piezo", "Fast output"]
+    },
+    {
+      name: "PictureMate PM-520",
+      category: "Mini Photo Lab",
+      img: "surecolor-p20070.jpg",
+      desc: "Portable printer for passport and visa photos.",
+      specs: ["2.7\" LCD", "Compact design", "Instant photos"]
+    },
+
+    /* ===== TEXTILE ===== */
+    {
+      name: "SureColor SC-F130",
+      category: "Dye Sublimation",
+      img: "sc-f130.jpg",
+      desc: "Entry-level dye-sublimation printer for customized products.",
+      specs: ["High productivity", "Compact size", "Vibrant colours"]
+    },
+    {
+      name: "SureColor SC-F530 / F531",
+      category: "Dye Sublimation",
+      img: "surecolor-f6400.jpg",
+      desc: "24-inch sublimation printers with fluorescent ink options.",
+      specs: ["Fluorescent inks", "24-inch width", "High efficiency"]
+    },
+    {
+      name: "SureColor SC-F9530 / F9530H",
+      category: "Textile / Industrial",
+      img: "sc-f9530.jpg",
+      desc: "Industrial textile printer for high-volume production.",
+      specs: ["147 m²/hr", "Dual 1.6L tanks", "Industrial duty"]
+    }
+
+  ];
+  %>
+
+  <div class="row g-4">
+    <% machines.forEach(m => { %>
+      <div class="col-md-4">
+        <div class="card machine-card h-100">
+          <img src="/images/epson/<%= m.img %>" class="card-img-top" alt="<%= m.name %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= m.name %></h5>
+            <p class="text-muted"><%= m.category %></p>
+            <p class="card-text"><%= m.desc %></p>
+
+            <button class="btn btn-outline-primary btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#detailsModal"
+              data-name="<%= m.name %>"
+              data-desc="<%= m.desc %>"
+              data-specs="<%= m.specs.join(',') %>">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<!-- DETAILS MODAL -->
+<div class="modal fade" id="detailsModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <p id="modalDesc"></p>
+        <ul id="modalSpecs"></ul>
+      </div>
+
+      <div class="modal-footer">
+        <a id="enquireBtn" class="btn btn-primary">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.getElementById("detailsModal").addEventListener("show.bs.modal", function (e) {
+  const btn = e.relatedTarget;
+
+  document.getElementById("modalTitle").innerText = btn.dataset.name;
+  document.getElementById("modalDesc").innerText = btn.dataset.desc;
+
+  const specs = btn.dataset.specs.split(",");
+  const ul = document.getElementById("modalSpecs");
+  ul.innerHTML = "";
+  specs.forEach(s => {
+    const li = document.createElement("li");
+    li.innerText = s;
+    ul.appendChild(li);
+  });
+
+  document.getElementById("enquireBtn").href =
+    "/enquire?brand=EPSON&machine=" + encodeURIComponent(btn.dataset.name);
+});
+</script>
+
+<%- include("partials/footer") %>
+
+</body>
+</html>
